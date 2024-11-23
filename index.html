@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo de Muebles</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+    <header class="bg-primary text-center text-white py-3">
+        <h1>Catálogo de Muebles</h1>
+    </header>
+
+    <section class="container" id="contenedor">
+        <div class="row">
+            <!-- Mensaje de carga -->
+            <div v-if="loading" class="col-12 text-center">
+                <p class="text-secondary">Cargando productos...</p>
+            </div>
+
+            <!-- Renderizado dinámico de productos -->
+            <div v-else v-for="producto in productos" :key="producto.id" class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img :src="producto.image" class="card-img-top" :alt="producto.name" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.name }}</h5>
+                        <p class="card-text"><strong>Precio:</strong> ${{ producto.price }}</p>
+                        <p class="card-text"><strong>Categoría:</strong> {{ producto.category }}</p>
+                        <div class="d-flex">
+                            <span
+                                v-for="color in producto.colors"
+                                :key="color"
+                                :style="{ backgroundColor: color }"
+                                class="color-circle"
+                            ></span>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button class="btn btn-primary btn-sm">Ver más</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Catálogo de Muebles</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/vue3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/funciones.js"></script>
+</body>
+</html>
